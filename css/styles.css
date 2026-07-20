@@ -458,11 +458,19 @@ svg { display: block; }
 .tx-amount--in { color: var(--primary); }
 .tx-amount--out { color: #D9534F; }
 
-/* floating cards around phone */
+/* floating cards around phone
+   NOTE: the outer .floating-card/.floating-dot/.floating-spark elements carry
+   the CSS `animation` (bob / spin-slow), which animates `transform`. JS never
+   touches these — it only ever writes to the inner `.floating-tilt` wrapper's
+   transform (mouse-parallax tilt). Keeping the two transform sources on
+   separate elements avoids the CSS-animation-vs-inline-style cascade fight
+   that caused the floaters to jitter. */
 .floating-card, .floating-dot, .floating-spark {
   position: absolute;
   will-change: transform;
 }
+.floating-tilt { will-change: transform; }
+
 .floating-card {
   background: var(--card-bg);
   backdrop-filter: blur(10px);
@@ -475,20 +483,21 @@ svg { display: block; }
 .floating-card--chart {
   top: 4%; right: -6%;
   width: 52px; height: 52px;
-  display: grid; place-items: center;
   color: var(--primary);
   background: linear-gradient(150deg, var(--accent-soft), #fff);
   animation-delay: 0.4s;
 }
+.floating-card--chart .floating-tilt { display: grid; place-items: center; width: 100%; height: 100%; }
 .floating-card--income {
   bottom: 14%; left: -12%;
-  display: flex; flex-direction: column; gap: 2px;
   animation-delay: 1.2s;
 }
+.floating-card--income .floating-tilt { display: flex; flex-direction: column; gap: 2px; }
 .floating-card__label { font-size: 10px; color: var(--ink-faint); font-weight: 600; }
 .floating-card__value { font-size: 13px; font-weight: 800; color: var(--primary-dark); }
 
-.floating-dot { border-radius: 50%; background: var(--accent); opacity: 0.7; animation: bob 7s ease-in-out infinite; }
+.floating-dot { animation: bob 7s ease-in-out infinite; }
+.floating-dot .floating-tilt { border-radius: 50%; background: var(--accent); opacity: 0.7; width: 100%; height: 100%; }
 .floating-dot--1 { width: 26px; height: 26px; top: 12%; left: -4%; animation-delay: 0.8s; }
 .floating-dot--2 { width: 14px; height: 14px; bottom: 6%; right: 10%; animation-delay: 2s; }
 .floating-spark { top: 30%; right: 4%; color: var(--secondary); animation: bob 5s ease-in-out infinite, spin-slow 9s linear infinite; }

@@ -107,7 +107,19 @@
   // ---- Mouse parallax + 3D tilt on hero visual ----
   const heroVisual = document.getElementById("heroVisual");
   const phoneMock = document.getElementById("phoneMock");
-  const floaters = document.querySelectorAll(".floating-card, .floating-dot, .floating-spark");
+  // NOTE: .floating-card / .floating-dot / .floating-spark carry a CSS
+  // `animation` that drives `transform` (bob / spin-slow). Writing an inline
+  // style.transform on those same elements would fight the CSS animation for
+  // the `transform` property and cause visible jitter. So the mouse-tilt
+  // effect below only ever writes to each element's inner `.floating-tilt`
+  // wrapper, which has no CSS animation of its own — data-speed still lives
+  // on the outer element.
+  const floaters = Array.from(
+    document.querySelectorAll(".floating-card, .floating-dot, .floating-spark")
+  ).map((el) => ({
+    speed: parseFloat(el.dataset.speed || "0.3"),
+    target: el.querySelector(".floating-tilt") || el,
+  }));
 
   if (heroVisual && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
     let rafId = null;
@@ -134,11 +146,10 @@
         phoneMock.style.setProperty("--rx", `${6 - currentY * 14}deg`);
         phoneMock.style.setProperty("--ry", `${-10 + currentX * 20}deg`);
       }
-      floaters.forEach((el) => {
-        const speed = parseFloat(el.dataset.speed || "0.3");
-        el.style.setProperty("--tilt-x", `${currentX * 30 * speed}px`);
-        el.style.setProperty("--tilt-y", `${currentY * 30 * speed}px`);
-        el.style.transform = `translate(var(--tilt-x, 0), var(--tilt-y, 0))`;
+      floaters.forEach(({ speed, target }) => {
+        target.style.setProperty("--tilt-x", `${currentX * 30 * speed}px`);
+        target.style.setProperty("--tilt-y", `${currentY * 30 * speed}px`);
+        target.style.transform = `translate(var(--tilt-x, 0), var(--tilt-y, 0))`;
       });
 
       if (Math.abs(targetX - currentX) > 0.001 || Math.abs(targetY - currentY) > 0.001) {
