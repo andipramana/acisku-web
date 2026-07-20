@@ -15,10 +15,12 @@ lalu buka `http://localhost:8080`.
 ## Struktur
 
 ```
-index.html       # semua konten & struktur halaman
-css/styles.css    # semua styling, token warna/tipografi di :root
-js/main.js        # parallax, scroll reveal, navbar glass, tilt 3D, menu mobile
-assets/           # gambar (layer parallax, logo, og-cover)
+index.html        # semua konten & struktur halaman
+css/styles.css     # semua styling, token warna/tipografi di :root
+js/main.js         # parallax, scroll reveal, navbar glass, tilt 3D, menu mobile, form kontak
+assets/            # gambar (layer parallax, logo, og-cover)
+downloads/acisku.apk  # file APK yang didownload dari tombol "Download Acisku"
+CNAME              # domain custom: acisku.andipramana.com
 ```
 
 ## Mengaktifkan GitHub Pages
@@ -27,24 +29,17 @@ Repo ini sudah berisi `index.html` di root, jadi tinggal:
 
 1. Buka **Settings → Pages** di repo GitHub.
 2. Source: **Deploy from a branch**, branch **main**, folder **/ (root)**.
-3. Simpan — halaman akan tersedia di `https://andipramana.github.io/acisku-web/` dalam beberapa menit.
+3. Simpan — halaman tersedia di `https://acisku.andipramana.com` (domain custom, lihat file `CNAME`).
 
 ## Update tombol "Download APK"
 
-Tombol download di halaman ini mengarah ke:
-
-```
-https://github.com/andipramana/acisku-web/releases/latest/download/acisku.apk
-```
-
-Ini adalah URL tetap yang selalu menunjuk ke file bernama `acisku.apk` di **release terbaru** repo ini — jadi kalau kamu upload APK baru dengan nama file yang sama ke sebuah GitHub Release, tombolnya otomatis mengarah ke situ tanpa perlu ubah kode.
-
-Cara upload:
+Tombol download mengarah langsung ke `downloads/acisku.apk` di repo ini (bukan GitHub Release) — jadi update-nya cukup timpa file itu:
 
 1. Build APK dari project Flutter `acisku` (`flutter build apk --release`), hasilnya ada di `build/app/outputs/flutter-apk/app-release.apk`.
-2. Di repo `acisku-web` di GitHub, buka **Releases → Draft a new release**.
-3. Beri tag versi (mis. `v0.1.0`), upload file APK-nya, **ganti nama file yang diupload menjadi `acisku.apk`** (nama file harus persis ini supaya link di atas bekerja).
-4. Publish release.
+2. Copy file itu ke `downloads/acisku.apk` di repo ini (timpa yang lama, nama file harus tetap persis `acisku.apk`).
+3. Commit & push — begitu GitHub Pages selesai deploy ulang, tombol download otomatis mengarah ke versi terbaru.
+
+Catatan: karena APK disimpan langsung di repo (bukan GitHub Release), setiap versi yang pernah di-commit tetap tersimpan di riwayat git selamanya — ukuran repo akan terus bertambah tiap kali APK-nya diupdate. Untuk project sekecil ini itu masih wajar, tapi kalau suatu saat ukurannya jadi masalah, pertimbangkan pindah ke GitHub Release (link `releases/latest/download/acisku.apk`) sebagai gantinya.
 
 ## Catatan konten
 
