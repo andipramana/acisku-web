@@ -73,6 +73,35 @@
     revealEls.forEach((el) => el.classList.add("is-visible"));
   }
 
+  // ---- Contact form (mailto handoff) ----
+  // This is a static site with no backend and no third-party form service
+  // wired in, so "submitting" the form means building a mailto: URL from the
+  // field values and handing off to the visitor's own configured email
+  // client with the message pre-filled. The name/message/type fields all
+  // carry the native `required` attribute, so the browser blocks the submit
+  // event (and shows its own validation UI) until they're filled in — no
+  // extra validation logic needed here.
+  const contactForm = document.getElementById("contactForm");
+  if (contactForm) {
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const name = contactForm.elements.name.value.trim();
+      const type = contactForm.elements.type.value;
+      const message = contactForm.elements.message.value.trim();
+
+      const subject = `[Acisku] ${type} — dari ${name}`;
+      const body = `Nama: ${name}\nJenis: ${type}\n\nPesan:\n${message}`;
+
+      const mailto =
+        "mailto:andipramana07@gmail.com" +
+        `?subject=${encodeURIComponent(subject)}` +
+        `&body=${encodeURIComponent(body)}`;
+
+      window.location.href = mailto;
+    });
+  }
+
   if (prefersReducedMotion) return; // skip parallax/tilt/cursor-glow entirely
 
   // ---- Cursor glow (desktop only) ----

@@ -54,6 +54,7 @@
       <a href="#kenapa">Kenapa Acisku</a>
       <a href="#unduh">Unduh</a>
       <a href="#faq">FAQ</a>
+      <a href="#kontak">Kontak</a>
     </nav>
 
     <div class="navbar__actions">
@@ -73,6 +74,7 @@
     <a href="#kenapa">Kenapa Acisku</a>
     <a href="#unduh">Unduh</a>
     <a href="#faq">FAQ</a>
+    <a href="#kontak">Kontak</a>
     <a href="#unduh" class="btn btn--primary">Download Acisku</a>
   </nav>
 </div>
@@ -412,6 +414,55 @@
     </div>
   </section>
 
+  <!-- ============ KONTAK ============ -->
+  <section class="section section--soft" id="kontak">
+    <div class="container container--narrow">
+      <div class="section__head" data-reveal>
+        <p class="eyebrow eyebrow--center"><span class="eyebrow__dot"></span> Kontak</p>
+        <h2 class="section__title">Ada kritik &amp; saran, request fitur, atau mau kerja sama?</h2>
+        <p class="section__desc">Semua masukan langsung masuk ke email pembuat Acisku &mdash; beneran dibaca, bukan cuma formalitas.</p>
+      </div>
+
+      <div class="contact-card" data-reveal>
+        <form class="contact-form" id="contactForm">
+          <div class="contact-form__row" data-reveal-child>
+            <div class="form-field">
+              <label for="contactName">Nama</label>
+              <input type="text" id="contactName" name="name" autocomplete="name" placeholder="Nama kamu" required />
+            </div>
+            <div class="form-field">
+              <label for="contactType">Jenis pesan</label>
+              <select id="contactType" name="type" required>
+                <option value="Kritik &amp; Saran">Kritik &amp; Saran</option>
+                <option value="Request Fitur">Request Fitur</option>
+                <option value="Kerja Sama / Kolaborasi">Kerja Sama / Kolaborasi</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-field" data-reveal-child>
+            <label for="contactMessage">Pesan</label>
+            <textarea id="contactMessage" name="message" rows="5" placeholder="Ceritain kritik, saran, fitur yang kamu mau, atau ide kolaborasinya di sini..." required></textarea>
+          </div>
+
+          <div class="contact-form__actions" data-reveal-child>
+            <button type="submit" class="btn btn--primary btn--lg btn--shimmer">
+              <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 12 20 4l-6 16-3-7-8-1Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+              <span>Kirim lewat Email</span>
+            </button>
+            <p class="contact-form__note">Tombol ini bakal membuka aplikasi email kamu dengan pesan yang sudah terisi otomatis, tinggal dicek lalu kirim.</p>
+          </div>
+        </form>
+
+        <p class="contact-fallback" data-reveal-child>
+          Atau email langsung ke
+          <a href="mailto:andipramana07@gmail.com">andipramana07@gmail.com</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer class="footer">
@@ -425,6 +476,7 @@
       <a href="#kenapa">Kenapa Acisku</a>
       <a href="#unduh">Unduh</a>
       <a href="#faq">FAQ</a>
+      <a href="#kontak">Kontak</a>
     </nav>
     <p class="footer__copy">&copy; <span id="year"></span> Acisku. Dibuat oleh Andi Pramana.</p>
   </div>
