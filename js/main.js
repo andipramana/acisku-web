@@ -7,6 +7,23 @@
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  // ---- Smooth-scroll only for in-page anchor links ----
+  // `scroll-behavior: smooth` used to be set globally on <html>. That also
+  // applies to ordinary mouse-wheel scrolling in Chrome/Edge on Windows,
+  // where each discrete wheel tick gets turned into its own eased scroll
+  // animation — a well-known cause of stepped/jittery-feeling scroll while
+  // just reading the page. Scope smooth scrolling to anchor-link navigation
+  // only, and leave native wheel/trackpad scrolling untouched.
+  document.querySelectorAll('a[href^="#"]').forEach((a) => {
+    a.addEventListener("click", (e) => {
+      const id = a.getAttribute("href").slice(1);
+      const target = id ? document.getElementById(id) : null;
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" });
+    });
+  });
+
   // ---- Navbar glass on scroll ----
   const navbar = document.getElementById("navbar");
   const onNavScroll = () => {
@@ -59,17 +76,32 @@
   if (prefersReducedMotion) return; // skip parallax/tilt/cursor-glow entirely
 
   // ---- Cursor glow (desktop only) ----
+  // NOTE: pointermove can fire hundreds of times/sec on some mice/trackpads.
+  // Writing custom properties (which repaint a fixed, full-viewport
+  // radial-gradient) on every raw event — instead of gating through rAF like
+  // the scroll handler below does — was a source of visible jank. Throttle it
+  // the same way.
   const cursorGlow = document.querySelector(".cursor-glow");
   if (cursorGlow && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
     let glowActive = false;
+    let glowTicking = false;
+    let lastX = 0, lastY = 0;
     window.addEventListener(
       "pointermove",
       (e) => {
-        cursorGlow.style.setProperty("--mx", `${e.clientX}px`);
-        cursorGlow.style.setProperty("--my", `${e.clientY}px`);
-        if (!glowActive) {
-          cursorGlow.classList.add("is-active");
-          glowActive = true;
+        lastX = e.clientX;
+        lastY = e.clientY;
+        if (!glowTicking) {
+          requestAnimationFrame(() => {
+            cursorGlow.style.setProperty("--mx", `${lastX}px`);
+            cursorGlow.style.setProperty("--my", `${lastY}px`);
+            if (!glowActive) {
+              cursorGlow.classList.add("is-active");
+              glowActive = true;
+            }
+            glowTicking = false;
+          });
+          glowTicking = true;
         }
       },
       { passive: true }
