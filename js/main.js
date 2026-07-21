@@ -94,7 +94,7 @@
       const body = `Nama: ${name}\nJenis: ${type}\n\nPesan:\n${message}`;
 
       const mailto =
-        "mailto:andipramana07@gmail.com" +
+        "mailto:contact.acisku@gmail.com" +
         `?subject=${encodeURIComponent(subject)}` +
         `&body=${encodeURIComponent(body)}`;
 
