@@ -352,12 +352,20 @@
     <div class="container download__inner" data-reveal>
       <div class="download__copy" data-reveal-child>
         <h2>Mulai Kelola Keuanganmu Hari Ini.</h2>
-        <p>Acisku masih dalam masa <strong class="text-accent">Early Access Testing</strong> di Google Play. Ajukan diri jadi tester, nanti kamu akan ditambahkan dan dikirimi link undangannya.</p>
+        <p>Acisku masih dalam masa <strong class="text-accent">Early Access Testing</strong> di Google Play. Daftarkan emailmu, nanti kamu akan ditambahkan dan dikirimi link undangannya.</p>
+
+        <form class="tester-form" id="testerForm">
+          <div class="form-field">
+            <label for="testerEmail" class="sr-only">Email</label>
+            <input type="email" id="testerEmail" name="email" autocomplete="email" placeholder="Email kamu" required />
+          </div>
+          <button type="submit" class="btn btn--primary btn--lg btn--shimmer">
+            <span>Ajukan Jadi Tester</span>
+          </button>
+        </form>
+        <p class="tester-form__status" id="testerFormStatus" role="status" aria-live="polite"></p>
 
         <div class="download__actions">
-          <a href="early-access.html" class="btn btn--primary btn--lg btn--shimmer">
-            <span>Ajukan Jadi Tester</span>
-          </a>
           <button type="button" class="already-invited">
             Sudah dapat email undangan? <span class="already-invited__cta">Klik di sini</span>
           </button>
