@@ -269,8 +269,18 @@ svg { display: block; }
 
 .hero {
   position: relative;
-  padding-top: clamp(7rem, 14vw, 10rem);
-  padding-bottom: clamp(4rem, 8vw, 6rem);
+  /* Fits the whole hero (text + phone) into one viewport at load, desktop
+     and mobile alike, instead of running past the fold — flex column's
+     default cross-axis stretch keeps .hero__grid full-width while
+     justify-content centers it vertically within the 100dvh box. Only
+     .hero__bg and .scroll-cue are position:absolute, so .hero__grid is
+     the sole flex item here. */
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: clamp(4.5rem, 9vw, 6rem);
+  padding-bottom: clamp(2rem, 4vw, 3rem);
   overflow: hidden;
   isolation: isolate;
 }
@@ -313,6 +323,13 @@ svg { display: block; }
 }
 @media (min-width: 980px) {
   .hero__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  /* .phone-stage's own max-width:360px (≈730px tall at its 340/690 aspect
+     ratio) was the actual cause of desktop overflow, not .hero's own
+     height — min-height/flex-centering can't shrink content that's
+     already taller than the viewport. Scaling the cap off viewport
+     HEIGHT (not just width) keeps the phone (and so the whole hero)
+     fitting one screen on both short laptop windows and tall monitors. */
+  .hero__visual .phone-stage { max-width: clamp(220px, 34vh, 320px); }
 }
 
 .hero__copy, .hero__visual { min-width: 0; }
