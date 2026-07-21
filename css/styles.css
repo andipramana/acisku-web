@@ -822,7 +822,11 @@ svg { display: block; }
   gap: 1.2rem;
 }
 #daftar .download__copy { grid-area: copy; }
-#daftar .download__visual { grid-area: visual; align-items: flex-start; }
+/* align-self (not the inner flex align-items) is what actually centers
+   this grid item's own box vertically against .download__copy's text
+   height in row 1 — the item's height stays its natural content height
+   (the phone-shrink box), just repositioned within the taller row. */
+#daftar .download__visual { grid-area: visual; align-self: center; align-items: center; }
 #daftar .download__cta { grid-area: cta; }
 
 /* Below 860px, the phone's chrome (notch, border-radius, padding — all
@@ -836,17 +840,17 @@ svg { display: block; }
 #daftar .phone-shrink {
   position: relative;
   width: 100px;
-  /* Fixed height (not aspect-ratio) with a few px of headroom above/below
-     the scaled phone's own 100 * 690/340 ≈ 203px — the idle float-phone
-     animation moves the (pre-scale) box by up to 14px, which is still
-     ~5px after the 0.357 scale, and with zero slack that was enough to
-     clip the top of the phone against overflow:hidden mid-animation. */
-  height: 213px;
+  /* Fixed height, taller than the scaled phone's own 100 * 690/340 ≈ 203px:
+     the idle float-phone animation only ever moves the phone UP from rest
+     (translateY 0 → -14px → 0, never below rest), which after the 0.357
+     scale is a ~5px upward shift — so the buffer + the phone's own top
+     offset below both live above the phone, not split evenly top/bottom. */
+  height: 216px;
   overflow: hidden;
 }
 #daftar .phone-shrink .phone {
   position: absolute;
-  top: -5px;
+  top: 10px;
   left: 0;
   width: 280px;
   --ps: 0.357; /* 100 / 280 */
