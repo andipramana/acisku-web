@@ -48,10 +48,13 @@
         <li><strong>Data keuangan yang kamu masukkan sendiri</strong> — transaksi, wallet, kategori, anggaran, aset, utang/piutang, tujuan menabung, dan transaksi berulang.</li>
         <li><strong>Foto struk (opsional)</strong> — hanya jika kamu memilih melampirkan foto ke sebuah transaksi.</li>
         <li><strong>PIN &amp; data biometrik untuk kunci aplikasi</strong> — <em>tidak pernah dikirim ke server mana pun</em>. PIN disimpan terenkripsi hanya di perangkat kamu sendiri (lewat penyimpanan aman bawaan Android/iOS), dan verifikasi biometrik (sidik jari/wajah) sepenuhnya ditangani oleh sistem operasi perangkat kamu, bukan oleh Acisku.</li>
+        <li><strong>Laporan crash/error (diagnostik teknis)</strong> — lewat Firebase Crashlytics (Google), Acisku mengirim laporan otomatis saat aplikasi mengalami error, berisi info teknis seperti model perangkat, versi sistem operasi, versi aplikasi, dan jejak error (stack trace). Laporan ini <strong>tidak berisi data keuangan atau isi transaksimu</strong> — hanya dipakai untuk menemukan dan memperbaiki bug.</li>
       </ul>
       <p>
-        Acisku <strong>tidak</strong> memakai SDK analitik, pelacakan perilaku, atau iklan pihak ketiga apa pun.
-        Tidak ada data yang dikumpulkan selain yang kamu masukkan sendiri untuk mencatat keuanganmu.
+        Acisku <strong>tidak</strong> memakai SDK iklan atau pelacakan perilaku/analitik pemasaran apa pun.
+        Satu-satunya layanan pihak ketiga yang dipakai adalah Firebase Crashlytics (khusus laporan crash, lihat
+        di atas) dan Supabase (tempat penyimpanan data, lihat bagian berikutnya). Tidak ada data yang
+        dikumpulkan selain yang kamu masukkan sendiri dan laporan crash teknis di atas.
       </p>
 
       <h2>Di mana data disimpan?</h2>
