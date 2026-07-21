@@ -171,7 +171,6 @@ svg { display: block; }
   pointer-events: none;
   cursor: default;
 }
-.btn.is-downloading .icon { animation: spin-slow 1s linear infinite; }
 
 /* ==========================================================================
    Navbar

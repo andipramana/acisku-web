@@ -19,6 +19,7 @@
     const label = downloadBtn.querySelector("span");
     const originalLabel = label.textContent;
     let downloading = false;
+    let dotsInterval = null;
 
     downloadBtn.addEventListener("click", (e) => {
       if (downloading) {
@@ -28,10 +29,17 @@
       downloading = true;
       downloadBtn.classList.add("is-downloading");
       downloadBtn.setAttribute("aria-disabled", "true");
-      label.textContent = "Downloading...";
+
+      let dots = 0;
+      label.textContent = "Downloading";
+      dotsInterval = setInterval(() => {
+        dots = (dots + 1) % 4;
+        label.textContent = "Downloading" + ".".repeat(dots);
+      }, 400);
 
       setTimeout(() => {
         downloading = false;
+        clearInterval(dotsInterval);
         downloadBtn.classList.remove("is-downloading");
         downloadBtn.removeAttribute("aria-disabled");
         label.textContent = originalLabel;
