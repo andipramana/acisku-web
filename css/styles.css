@@ -833,6 +833,22 @@ body.page-early-access .footer { flex-shrink: 0; padding-block: 0.75rem; }
   padding-block: 1rem;
 }
 #daftar .download__inner {
+  /* .download__bg (the parallax grass layers) now lives inside this element
+     instead of behind it as a section-level sibling — the base
+     .download__inner is an opaque white "card" (background/border/shadow),
+     which was hiding the grass everywhere the card covered and only
+     showing it in the section's outer gutter. position+z-index here makes
+     this element its own stacking context so .download__bg's z-index:-1
+     paints behind the copy/visual content but in front of nothing solid;
+     overflow:hidden clips it to the (now borderless) card's edges. Card
+     chrome is dropped entirely so the grass reads as the page's own
+     backdrop, matching the frameless look the hero uses. */
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  background: none;
+  border: none;
+  box-shadow: none;
   width: 100%;
   padding: clamp(1rem, 3vw, 1.75rem);
   grid-template-columns: minmax(0, 1fr) 130px;
