@@ -7,46 +7,6 @@
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // ---- Download APK button feedback ----
-  // The APK is ~70MB and clicking an <a download> gives zero visual
-  // feedback while the browser's download manager picks it up — easy to
-  // mistake for "nothing happened" and click again. There's no reliable
-  // browser event for "download finished" on a plain anchor click, so
-  // this just blocks re-clicks and shows a "Downloading..." state for a
-  // few seconds after the first click, then resets.
-  const downloadBtn = document.getElementById("downloadApkBtn");
-  if (downloadBtn) {
-    const label = downloadBtn.querySelector("span");
-    const originalLabel = label.textContent;
-    let downloading = false;
-    let dotsInterval = null;
-
-    downloadBtn.addEventListener("click", (e) => {
-      if (downloading) {
-        e.preventDefault();
-        return;
-      }
-      downloading = true;
-      downloadBtn.classList.add("is-downloading");
-      downloadBtn.setAttribute("aria-disabled", "true");
-
-      let dots = 0;
-      label.textContent = "Downloading";
-      dotsInterval = setInterval(() => {
-        dots = (dots + 1) % 4;
-        label.textContent = "Downloading" + ".".repeat(dots);
-      }, 400);
-
-      setTimeout(() => {
-        downloading = false;
-        clearInterval(dotsInterval);
-        downloadBtn.classList.remove("is-downloading");
-        downloadBtn.removeAttribute("aria-disabled");
-        label.textContent = originalLabel;
-      }, 6000);
-    });
-  }
-
   // ---- Smooth-scroll only for in-page anchor links ----
   // `scroll-behavior: smooth` used to be set globally on <html>. That also
   // applies to ordinary mouse-wheel scrolling in Chrome/Edge on Windows,
