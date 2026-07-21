@@ -808,6 +808,53 @@ svg { display: block; }
 .phone__screen--simple img { border-radius: 18px; }
 .phone__screen--simple p { font-weight: 800; color: var(--ink); font-size: 1.1rem; }
 
+/* Tester page only (#daftar) — keep the phone mockup beside the text at
+   every viewport width instead of the shared .download__inner's default of
+   stacking to one column below 860px. Scoped to this page's section id so
+   the landing page's own #unduh download section is unaffected. */
+#daftar .download__inner {
+  grid-template-columns: minmax(0, 1fr) 100px;
+  align-items: center;
+  gap: 1.2rem;
+}
+#daftar .download__visual { align-items: flex-start; }
+
+/* Below 860px, the phone's chrome (notch, border-radius, padding — all
+   fixed px, not proportional) looks broken if just shrunk via width, and
+   the mockscreen content (chips, donut, tx list) has no room to reflow at
+   ~120px wide. Render .phone at its natural comfortable width off to the
+   side, then visually scale the whole thing down with the transform this
+   class already supports (`scale(var(--ps,1))`) — proportions stay intact,
+   only overall size shrinks. .phone-shrink reserves just the small
+   post-scale footprint in the grid so the layout doesn't leave a gap. */
+#daftar .phone-shrink {
+  position: relative;
+  width: 100px;
+  aspect-ratio: 340 / 690;
+  overflow: hidden;
+}
+#daftar .phone-shrink .phone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 280px;
+  --ps: 0.357; /* 100 / 280 */
+}
+@media (min-width: 860px) {
+  #daftar .download__inner { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: 3rem; }
+  #daftar .phone-shrink {
+    position: static;
+    width: auto;
+    aspect-ratio: auto;
+    overflow: visible;
+  }
+  #daftar .phone-shrink .phone {
+    position: static;
+    width: 100%;
+    --ps: 1;
+  }
+}
+
 /* ==========================================================================
    FAQ
    ========================================================================== */
