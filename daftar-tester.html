@@ -29,24 +29,20 @@
   </div>
 </header>
 
-<main id="main">
-  <section class="section" style="padding-top: clamp(7rem, 12vw, 9rem); padding-bottom: clamp(4rem, 8vw, 6rem);">
-    <div class="container container--narrow">
-      <div class="section__head" data-reveal>
-        <p class="eyebrow eyebrow--center"><span class="eyebrow__dot"></span> Closed Testing</p>
-        <h1 class="section__title">Ajukan Jadi Tester Acisku</h1>
-        <p class="section__desc">
-          Acisku masih dalam masa Closed Testing di Google Play, jadi belum bisa diinstall bebas oleh siapa saja.
-          Daftarkan emailmu di bawah — nanti kamu akan ditambahkan ke daftar tester secara manual dan dikirimi
-          link undangannya lewat email.
-        </p>
-      </div>
+<main id="main" style="padding-top: 5rem;">
 
-      <div class="contact-card" data-reveal style="max-width: 480px; margin: 0 auto;">
-        <form class="tester-form" id="testerForm" style="flex-direction: column; align-items: stretch;">
+  <!-- ============ DOWNLOAD (sama seperti section di landing page) ============ -->
+  <section class="section download" id="daftar">
+    <div class="download__bg" aria-hidden="true"></div>
+    <div class="container download__inner" data-reveal>
+      <div class="download__copy" data-reveal-child>
+        <h1>Ajukan Jadi Tester Acisku</h1>
+        <p>Acisku masih dalam masa Closed Testing di Google Play. Daftarkan emailmu, nanti kamu akan ditambahkan sebagai tester dan dikirimi link undangannya.</p>
+
+        <form class="tester-form" id="testerForm">
           <div class="form-field">
-            <label for="testerEmail">Email kamu</label>
-            <input type="email" id="testerEmail" name="email" autocomplete="email" placeholder="nama@email.com" required />
+            <label for="testerEmail" class="sr-only">Email</label>
+            <input type="email" id="testerEmail" name="email" autocomplete="email" placeholder="Email kamu" required />
           </div>
           <button type="submit" class="btn btn--primary btn--lg btn--shimmer">
             <span>Ajukan Jadi Tester</span>
@@ -54,13 +50,26 @@
         </form>
         <p class="tester-form__status" id="testerFormStatus" role="status" aria-live="polite"></p>
 
-        <p class="contact-fallback" data-reveal-child style="margin-top: 1.5rem;">
-          Sudah dapat email undangan?
-          <a href="https://play.google.com/apps/testing/com.andipramana.acisku" target="_blank" rel="noopener">Buka halaman Closed Testing</a>
-        </p>
+        <div class="download__actions" style="margin-top: 1.6rem;">
+          <span class="download__meta">Sudah dapat email undangan?</span>
+          <a href="https://play.google.com/apps/testing/com.andipramana.acisku" target="_blank" rel="noopener" class="download__badge">
+            <img src="assets/google-play-badge.svg" alt="Buka halaman Closed Testing di Google Play" width="200" height="60" />
+          </a>
+        </div>
+      </div>
+
+      <div class="download__visual" data-reveal-child aria-hidden="true">
+        <div class="phone phone--small">
+          <div class="phone__notch"></div>
+          <div class="phone__screen phone__screen--simple">
+            <img src="assets/logo-mark.png" width="64" height="64" alt="" />
+            <p>Acisku</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+
 </main>
 
 <footer class="footer">
