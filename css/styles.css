@@ -750,6 +750,34 @@ svg { display: block; }
 .download__badge:hover { transform: translateY(-2px); opacity: 0.92; }
 .download__badge img { display: block; height: 60px; width: auto; }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.tester-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.6rem;
+  align-items: flex-start;
+}
+.tester-form .form-field { flex: 1 1 260px; }
+.tester-form__status {
+  margin-top: 0.7rem;
+  font-size: 0.85rem;
+  min-height: 1.2em;
+}
+.tester-form__status.is-success { color: var(--primary); }
+.tester-form__status.is-error { color: #d9534f; }
+
 .download__howto { margin-top: 1.6rem; }
 .download__howto summary {
   cursor: pointer;

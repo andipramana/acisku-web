@@ -7,6 +7,51 @@
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  // ---- Tester request form ----
+  // Submits straight to Supabase's REST API with the publishable key — no
+  // backend of our own needed. The key is not secret (RLS is the actual
+  // security boundary: anon can only INSERT here, never read the list back).
+  const SUPABASE_URL = "https://klafrhlcxyyxdbrdenwk.supabase.co";
+  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_qWDO6IWishBFPgZnLnDGJw_9CIZs2eR";
+
+  const testerForm = document.getElementById("testerForm");
+  const testerStatus = document.getElementById("testerFormStatus");
+  if (testerForm && testerStatus) {
+    testerForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = testerForm.email.value.trim();
+      if (!email) return;
+
+      const submitBtn = testerForm.querySelector("button[type=submit]");
+      submitBtn.disabled = true;
+      testerStatus.textContent = "Mengirim...";
+      testerStatus.className = "tester-form__status";
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/tester_requests`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            apikey: SUPABASE_PUBLISHABLE_KEY,
+            Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
+          },
+          body: JSON.stringify({ email }),
+        });
+
+        if (!res.ok) throw new Error(`Request failed: ${res.status}`);
+
+        testerStatus.textContent = "Terima kasih! Kami akan tambahkan kamu sebagai tester dan kirim link undangan lewat email.";
+        testerStatus.className = "tester-form__status is-success";
+        testerForm.reset();
+      } catch (err) {
+        testerStatus.textContent = "Gagal mengirim, coba lagi sebentar lagi ya.";
+        testerStatus.className = "tester-form__status is-error";
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+  }
+
   // ---- Smooth-scroll only for in-page anchor links ----
   // `scroll-behavior: smooth` used to be set globally on <html>. That also
   // applies to ordinary mouse-wheel scrolling in Chrome/Edge on Windows,
