@@ -52,6 +52,19 @@
     });
   }
 
+  // ---- "Already invited?" reveal ----
+  // The Play Store badge only makes sense for someone already whitelisted
+  // as a tester — showing it to everyone up front just invites people who
+  // aren't invited yet to tap it and hit a broken/blocked listing. Keep it
+  // hidden behind a deliberate click instead.
+  document.querySelectorAll(".already-invited").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const badge = btn.nextElementSibling;
+      if (badge) badge.hidden = false;
+      btn.hidden = true;
+    });
+  });
+
   // ---- Smooth-scroll only for in-page anchor links ----
   // `scroll-behavior: smooth` used to be set globally on <html>. That also
   // applies to ordinary mouse-wheel scrolling in Chrome/Edge on Windows,

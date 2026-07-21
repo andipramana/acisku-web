@@ -749,6 +749,33 @@ svg { display: block; }
 .download__badge { display: inline-block; line-height: 0; border-radius: 8px; transition: transform 0.2s ease, opacity 0.2s ease; }
 .download__badge:hover { transform: translateY(-2px); opacity: 0.92; }
 .download__badge img { display: block; height: 60px; width: auto; }
+.download__badge[hidden] { display: none; }
+
+/* Trigger for the Play Store badge, hidden until clicked (see
+   .already-invited JS in main.js) — sized/colored to actually read as an
+   interactive prompt rather than blend in as fine print. */
+.already-invited {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.already-invited__cta {
+  font-weight: 800;
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.already-invited:hover .already-invited__cta,
+.already-invited:focus-visible .already-invited__cta { color: var(--primary-dark); }
+.already-invited[hidden] { display: none; }
 
 .sr-only {
   position: absolute;
