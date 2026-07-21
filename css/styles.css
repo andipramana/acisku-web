@@ -808,67 +808,87 @@ svg { display: block; }
 .phone__screen--simple img { border-radius: 18px; }
 .phone__screen--simple p { font-weight: 800; color: var(--ink); font-size: 1.1rem; }
 
-/* Tester page only (#daftar) — keep the phone mockup beside the intro text
-   at every viewport width instead of the shared .download__inner's default
-   of stacking to one column below 860px, and give the form/CTA its own
-   full-width row underneath (rather than sharing a row with the phone,
-   which used to force the phone to vertically center against the whole
-   tall text+form stack). Scoped to this page's section id so the landing
-   page's own #unduh download section is unaffected. */
-#daftar .download__inner {
-  grid-template-columns: minmax(0, 1fr) 100px;
-  grid-template-areas: "copy visual" "cta cta";
-  align-items: start;
-  gap: 1.2rem;
-}
-#daftar .download__copy { grid-area: copy; }
-/* align-self (not the inner flex align-items) is what actually centers
-   this grid item's own box vertically against .download__copy's text
-   height in row 1 — the item's height stays its natural content height
-   (the phone-shrink box), just repositioned within the taller row. */
-#daftar .download__visual { grid-area: visual; align-self: center; align-items: center; }
-#daftar .download__cta { grid-area: cta; }
-
-/* Below 860px, the phone's chrome (notch, border-radius, padding — all
-   fixed px, not proportional) looks broken if just shrunk via width, and
-   the mockscreen content (chips, donut, tx list) has no room to reflow at
-   ~120px wide. Render .phone at its natural comfortable width off to the
-   side, then visually scale the whole thing down with the transform this
-   class already supports (`scale(var(--ps,1))`) — proportions stay intact,
-   only overall size shrinks. .phone-shrink reserves just the small
-   post-scale footprint in the grid so the layout doesn't leave a gap. */
-#daftar .phone-shrink {
-  position: relative;
-  width: 100px;
-  /* Fixed height, taller than the scaled phone's own 100 * 690/340 ≈ 203px:
-     the idle float-phone animation only ever moves the phone UP from rest
-     (translateY 0 → -14px → 0, never below rest), which after the 0.357
-     scale is a ~5px upward shift — so the buffer + the phone's own top
-     offset below both live above the phone, not split evenly top/bottom. */
-  height: 216px;
+/* Tester/Early-Access page only (#daftar / body.page-early-access) — this
+   is a single-purpose conversion page (not a long scrolling one like the
+   landing page), so it gets a compact page-level flex layout that fits
+   the fixed navbar + content + footer into one viewport with no scrolling,
+   plus its own tighter vertical rhythm instead of the shared .section's
+   generous clamp(4rem,8vw,7rem) block padding. Scoped to this page's body
+   class / section id so the landing page's own #unduh section and normal
+   scrolling pages are unaffected. */
+body.page-early-access {
+  height: 100dvh;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
-#daftar .phone-shrink .phone {
+body.page-early-access #main { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+body.page-early-access .footer { flex-shrink: 0; padding-block: 0.75rem; }
+
+#daftar {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  padding-block: 1rem;
+}
+#daftar .download__inner {
+  width: 100%;
+  padding: clamp(1rem, 3vw, 1.75rem);
+  grid-template-columns: minmax(0, 1fr) 130px;
+  align-items: center;
+  gap: 1rem;
+}
+#daftar .download__copy h1 { font-size: clamp(1.25rem, 4vw, 1.8rem); }
+#daftar .download__copy > p { font-size: 0.92rem; margin-top: 0.5rem; }
+#daftar .tester-form { margin-top: 0.9rem; }
+
+/* .phone's own chrome (notch, border-radius, padding) and the mockscreen
+   content (chips, donut, tx list) are fixed px, tuned for the ~280-360px
+   width the hero renders it at — reflowing all of that at a genuinely
+   narrow ~130px column would break it. Render .phone at that natural
+   comfortable width off to the side, then visually scale the whole thing
+   down with the transform it already supports (`scale(var(--ps,1))`) —
+   proportions (and the tilt) stay intact, only overall size shrinks.
+   .phone-stage reserves just the small post-scale footprint so the grid
+   column stays a fixed 130px matching it exactly. */
+#daftar .phone-stage {
+  position: relative;
+  width: 130px;
+  /* Height has headroom above the scaled phone's own 130 * 690/340 ≈ 264px:
+     the idle float-phone animation only ever moves the phone UP from rest
+     (translateY 0 → -14px → 0), which after the ~0.464 scale is a ~6.5px
+     upward shift — the buffer lives above the phone, not split evenly. */
+  height: 275px;
+  overflow: hidden;
+  margin-inline: 0;
+  perspective: none;
+}
+#daftar .phone-stage .phone {
   position: absolute;
   top: 10px;
   left: 0;
   width: 280px;
-  --ps: 0.357; /* 100 / 280 */
+  --ps: 0.464; /* 130 / 280 */
   /* scale() pivots around the element's own center by default, which
      would shove this shrunk box outside the wrapper's clipped bounds
      (and leave just a sliver visible) — anchor it to top-left instead
      so it scales down in place, matching the wrapper's origin. */
   transform-origin: top left;
 }
+
 @media (min-width: 860px) {
   #daftar .download__inner { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: 3rem; }
-  #daftar .phone-shrink {
+  #daftar .phone-stage {
     position: static;
     width: auto;
     height: auto;
     overflow: visible;
+    perspective: 1400px;
+    margin-inline: auto;
+    max-width: 320px;
   }
-  #daftar .phone-shrink .phone {
+  #daftar .phone-stage .phone {
     position: static;
     top: 0;
     width: 100%;

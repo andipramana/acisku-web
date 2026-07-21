@@ -14,7 +14,7 @@
 
 <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body>
+<body class="page-early-access">
 
 <header class="navbar is-scrolled" id="navbar">
   <div class="container navbar__inner">
@@ -29,7 +29,7 @@
   </div>
 </header>
 
-<main id="main" style="padding-top: 5rem;">
+<main id="main" style="padding-top: 4rem;">
 
   <!-- ============ DOWNLOAD (sama seperti section di landing page) ============ -->
   <section class="section download" id="daftar">
@@ -42,11 +42,29 @@
     <div class="container download__inner" data-reveal>
       <div class="download__copy" data-reveal-child>
         <h1>Ajukan Jadi Tester Acisku</h1>
-        <p>Acisku masih dalam masa <strong class="text-accent">Early Access Testing</strong> di Google Play. Daftarkan emailmu, nanti kamu akan ditambahkan sebagai tester dan dikirimi link undangannya.</p>
+        <p>Daftarkan emailmu untuk gabung <strong class="text-accent">Early Access Testing</strong> Acisku. Kami kirim link undangannya lewat email.</p>
+
+        <form class="tester-form" id="testerForm">
+          <div class="form-field">
+            <label for="testerEmail" class="sr-only">Email</label>
+            <input type="email" id="testerEmail" name="email" autocomplete="email" placeholder="Email kamu" required />
+          </div>
+          <button type="submit" class="btn btn--primary btn--lg btn--shimmer">
+            <span>Ajukan Jadi Tester</span>
+          </button>
+        </form>
+        <p class="tester-form__status" id="testerFormStatus" role="status" aria-live="polite"></p>
+
+        <div class="download__actions" style="margin-top: 1rem;">
+          <span class="download__meta">Sudah dapat email undangan?</span>
+          <a href="https://play.google.com/store/apps/details?id=com.andipramana.acisku" target="_blank" rel="noopener" class="download__badge">
+            <img src="assets/google-play-badge.svg" alt="Buka Acisku di Google Play" width="200" height="60" />
+          </a>
+        </div>
       </div>
 
       <div class="download__visual" data-reveal-child aria-hidden="true">
-        <div class="phone-shrink">
+        <div class="phone-stage">
         <div class="phone">
           <div class="phone__notch"></div>
           <div class="phone__screen">
@@ -105,26 +123,6 @@
             </div>
           </div>
         </div>
-        </div>
-      </div>
-
-      <div class="download__cta" data-reveal-child>
-        <form class="tester-form" id="testerForm">
-          <div class="form-field">
-            <label for="testerEmail" class="sr-only">Email</label>
-            <input type="email" id="testerEmail" name="email" autocomplete="email" placeholder="Email kamu" required />
-          </div>
-          <button type="submit" class="btn btn--primary btn--lg btn--shimmer">
-            <span>Ajukan Jadi Tester</span>
-          </button>
-        </form>
-        <p class="tester-form__status" id="testerFormStatus" role="status" aria-live="polite"></p>
-
-        <div class="download__actions" style="margin-top: 1.6rem;">
-          <span class="download__meta">Sudah dapat email undangan?</span>
-          <a href="https://play.google.com/store/apps/details?id=com.andipramana.acisku" target="_blank" rel="noopener" class="download__badge">
-            <img src="assets/google-play-badge.svg" alt="Buka Acisku di Google Play" width="200" height="60" />
-          </a>
         </div>
       </div>
     </div>
