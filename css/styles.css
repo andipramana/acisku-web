@@ -808,16 +808,22 @@ svg { display: block; }
 .phone__screen--simple img { border-radius: 18px; }
 .phone__screen--simple p { font-weight: 800; color: var(--ink); font-size: 1.1rem; }
 
-/* Tester page only (#daftar) — keep the phone mockup beside the text at
-   every viewport width instead of the shared .download__inner's default of
-   stacking to one column below 860px. Scoped to this page's section id so
-   the landing page's own #unduh download section is unaffected. */
+/* Tester page only (#daftar) — keep the phone mockup beside the intro text
+   at every viewport width instead of the shared .download__inner's default
+   of stacking to one column below 860px, and give the form/CTA its own
+   full-width row underneath (rather than sharing a row with the phone,
+   which used to force the phone to vertically center against the whole
+   tall text+form stack). Scoped to this page's section id so the landing
+   page's own #unduh download section is unaffected. */
 #daftar .download__inner {
   grid-template-columns: minmax(0, 1fr) 100px;
-  align-items: center;
+  grid-template-areas: "copy visual" "cta cta";
+  align-items: start;
   gap: 1.2rem;
 }
-#daftar .download__visual { align-items: flex-start; }
+#daftar .download__copy { grid-area: copy; }
+#daftar .download__visual { grid-area: visual; align-items: flex-start; }
+#daftar .download__cta { grid-area: cta; }
 
 /* Below 860px, the phone's chrome (notch, border-radius, padding — all
    fixed px, not proportional) looks broken if just shrunk via width, and
@@ -830,12 +836,17 @@ svg { display: block; }
 #daftar .phone-shrink {
   position: relative;
   width: 100px;
-  aspect-ratio: 340 / 690;
+  /* Fixed height (not aspect-ratio) with a few px of headroom above/below
+     the scaled phone's own 100 * 690/340 ≈ 203px — the idle float-phone
+     animation moves the (pre-scale) box by up to 14px, which is still
+     ~5px after the 0.357 scale, and with zero slack that was enough to
+     clip the top of the phone against overflow:hidden mid-animation. */
+  height: 213px;
   overflow: hidden;
 }
 #daftar .phone-shrink .phone {
   position: absolute;
-  top: 0;
+  top: -5px;
   left: 0;
   width: 280px;
   --ps: 0.357; /* 100 / 280 */
@@ -850,11 +861,12 @@ svg { display: block; }
   #daftar .phone-shrink {
     position: static;
     width: auto;
-    aspect-ratio: auto;
+    height: auto;
     overflow: visible;
   }
   #daftar .phone-shrink .phone {
     position: static;
+    top: 0;
     width: 100%;
     --ps: 1;
   }
