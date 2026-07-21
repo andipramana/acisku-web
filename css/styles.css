@@ -839,6 +839,11 @@ svg { display: block; }
   left: 0;
   width: 280px;
   --ps: 0.357; /* 100 / 280 */
+  /* scale() pivots around the element's own center by default, which
+     would shove this shrunk box outside the wrapper's clipped bounds
+     (and leave just a sliver visible) — anchor it to top-left instead
+     so it scales down in place, matching the wrapper's origin. */
+  transform-origin: top left;
 }
 @media (min-width: 860px) {
   #daftar .download__inner { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: 3rem; }
