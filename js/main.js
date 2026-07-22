@@ -38,6 +38,16 @@
           body: JSON.stringify({ email }),
         });
 
+        // 409 = the unique index on lower(trim(email)) rejected a repeat
+        // submission — not a real failure, so it gets the same reassuring
+        // message as a fresh signup instead of the generic error path.
+        if (res.status === 409) {
+          testerStatus.textContent = "Email ini sudah terdaftar sebelumnya — undangannya bakal segera dikirim, tunggu ya.";
+          testerStatus.className = "tester-form__status is-success";
+          testerForm.reset();
+          return;
+        }
+
         if (!res.ok) throw new Error(`Request failed: ${res.status}`);
 
         testerStatus.textContent = "Terima kasih! Kami akan tambahkan kamu untuk Early Access dan kirim link undangan lewat email.";
