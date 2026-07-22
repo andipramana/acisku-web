@@ -42,7 +42,7 @@
         // submission — not a real failure, so it gets the same reassuring
         // message as a fresh signup instead of the generic error path.
         if (res.status === 409) {
-          testerStatus.textContent = "Email ini sudah terdaftar sebelumnya — undangannya bakal segera dikirim, tunggu ya.";
+          testerStatus.textContent = "Email sudah terdaftar, harap tunggu undangan.";
           testerStatus.className = "tester-form__status is-success";
           testerForm.reset();
           return;
