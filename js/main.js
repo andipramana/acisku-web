@@ -40,7 +40,7 @@
 
         if (!res.ok) throw new Error(`Request failed: ${res.status}`);
 
-        testerStatus.textContent = "Terima kasih! Kami akan tambahkan kamu sebagai tester dan kirim link undangan lewat email.";
+        testerStatus.textContent = "Terima kasih! Kami akan tambahkan kamu untuk Early Access dan kirim link undangan lewat email.";
         testerStatus.className = "tester-form__status is-success";
         testerForm.reset();
       } catch (err) {
