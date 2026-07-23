@@ -19,8 +19,8 @@ index.html        # semua konten & struktur halaman
 css/styles.css     # semua styling, token warna/tipografi di :root
 js/main.js         # parallax, scroll reveal, navbar glass, tilt 3D, menu mobile, form kontak
 assets/            # gambar (layer parallax, logo, og-cover)
-downloads/acisku.apk  # file APK yang didownload dari tombol "Download Artosku"
-CNAME              # domain custom: acisku.andipramana.com
+downloads/artosku.apk  # file APK yang didownload dari tombol "Download Artosku"
+CNAME              # domain custom: artosku.andipramana.com
 ```
 
 ## Mengaktifkan GitHub Pages
@@ -29,17 +29,17 @@ Repo ini sudah berisi `index.html` di root, jadi tinggal:
 
 1. Buka **Settings → Pages** di repo GitHub.
 2. Source: **Deploy from a branch**, branch **main**, folder **/ (root)**.
-3. Simpan — halaman tersedia di `https://acisku.andipramana.com` (domain custom, lihat file `CNAME`).
+3. Simpan — halaman tersedia di `https://artosku.andipramana.com` (domain custom, lihat file `CNAME`).
 
 ## Update tombol "Download APK"
 
-Tombol download mengarah langsung ke `downloads/acisku.apk` di repo ini (bukan GitHub Release) — jadi update-nya cukup timpa file itu:
+Tombol download mengarah langsung ke `downloads/artosku.apk` di repo ini (bukan GitHub Release) — jadi update-nya cukup timpa file itu:
 
-1. Build APK dari project Flutter `acisku` (`flutter build apk --release`), hasilnya ada di `build/app/outputs/flutter-apk/app-release.apk`.
-2. Copy file itu ke `downloads/acisku.apk` di repo ini (timpa yang lama, nama file harus tetap persis `acisku.apk`).
+1. Build APK dari project Flutter `artosku` (`flutter build apk --release`), hasilnya ada di `build/app/outputs/flutter-apk/app-release.apk`.
+2. Copy file itu ke `downloads/artosku.apk` di repo ini (timpa yang lama, nama file harus tetap persis `artosku.apk`).
 3. Commit & push — begitu GitHub Pages selesai deploy ulang, tombol download otomatis mengarah ke versi terbaru.
 
-Catatan: karena APK disimpan langsung di repo (bukan GitHub Release), setiap versi yang pernah di-commit tetap tersimpan di riwayat git selamanya — ukuran repo akan terus bertambah tiap kali APK-nya diupdate. Untuk project sekecil ini itu masih wajar, tapi kalau suatu saat ukurannya jadi masalah, pertimbangkan pindah ke GitHub Release (link `releases/latest/download/acisku.apk`) sebagai gantinya.
+Catatan: karena APK disimpan langsung di repo (bukan GitHub Release), setiap versi yang pernah di-commit tetap tersimpan di riwayat git selamanya — ukuran repo akan terus bertambah tiap kali APK-nya diupdate. Untuk project sekecil ini itu masih wajar, tapi kalau suatu saat ukurannya jadi masalah, pertimbangkan pindah ke GitHub Release (link `releases/latest/download/artosku.apk`) sebagai gantinya.
 
 ## Catatan konten
 
