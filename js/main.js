@@ -158,7 +158,7 @@
       const type = contactForm.elements.type.value;
       const message = contactForm.elements.message.value.trim();
 
-      const subject = `[Acisku] ${type} — dari ${name}`;
+      const subject = `[Artosku] ${type} — dari ${name}`;
       const body = `Nama: ${name}\nJenis: ${type}\n\nPesan:\n${message}`;
 
       const mailto =

@@ -1,6 +1,6 @@
-# Acisku — Landing Page
+# Artosku — Landing Page
 
-Landing page statis (HTML/CSS/JS biasa, tanpa build step) untuk Acisku, di-host lewat GitHub Pages.
+Landing page statis (HTML/CSS/JS biasa, tanpa build step) untuk Artosku, di-host lewat GitHub Pages.
 
 ## Menjalankan lokal
 
@@ -19,7 +19,7 @@ index.html        # semua konten & struktur halaman
 css/styles.css     # semua styling, token warna/tipografi di :root
 js/main.js         # parallax, scroll reveal, navbar glass, tilt 3D, menu mobile, form kontak
 assets/            # gambar (layer parallax, logo, og-cover)
-downloads/acisku.apk  # file APK yang didownload dari tombol "Download Acisku"
+downloads/acisku.apk  # file APK yang didownload dari tombol "Download Artosku"
 CNAME              # domain custom: acisku.andipramana.com
 ```
 
@@ -45,7 +45,7 @@ Catatan: karena APK disimpan langsung di repo (bukan GitHub Release), setiap ver
 
 Beberapa bagian dari brief awal sengaja tidak dipakai supaya halaman ini tidak menampilkan klaim yang tidak benar:
 
-- **Tidak ada badge Google Play / App Store** — Acisku belum rilis di sana, tombol download mengarah langsung ke file APK.
+- **Tidak ada badge Google Play / App Store** — Artosku belum rilis di sana, tombol download mengarah langsung ke file APK.
 - **Tidak ada angka statistik (jumlah download, rating, dsb.)** — belum ada data nyata untuk itu.
 - **Tidak ada testimoni palsu** — diganti dengan catatan singkat dari pembuat aplikasi.
 
